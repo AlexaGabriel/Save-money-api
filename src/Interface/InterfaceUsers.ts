@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface IUser{
     name:string;
     email:string
