@@ -15,7 +15,7 @@ export class middUser{
         };
 
         try {
-            const newUser = this.ServiceUser.CreateUser({
+            const newUser = await this.ServiceUser.CreateUser({
                 name,
                 email,
                 password,

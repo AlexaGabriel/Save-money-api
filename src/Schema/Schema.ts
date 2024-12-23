@@ -1,10 +1,10 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export const SUser = z.object({
-    name: z.string().min(3),
-    email: z.string().email(),
+    name: z.string().min(3, "Name must have at least 3 characters"),
+    email: z.string().email("Invalid email address"),
     password: z.string(),
-    createdAt: z.string().date()
+    createdAt: z.date() 
 });
 
 export const STransactions = z.object({
@@ -12,7 +12,7 @@ export const STransactions = z.object({
     type: z.enum(["income", "expense"]),
     amount: z.number(),
     category: z.string(),
-    date: z.string().date()
+    date: z.date() 
 });
 
 export const SStatistics = z.object({
@@ -20,23 +20,23 @@ export const SStatistics = z.object({
     totalIncome: z.number(),
     totalExpense: z.number(),
     balance: z.number(),
-    updateAt: z.string().date()
+    updateAt: z.date() 
 });
 
 export const SGoal = z.object({
     userId: z.string(),
-    name: z.string().min(3),
+    name: z.string().min(3, "Goal name must have at least 3 characters"),
     targetAmount: z.number(),
     currentAmount: z.number(),
-    deadline: z.string().date(),
-    createdAt: z.string().date()
+    deadline: z.date(), 
+    createdAt: z.date() 
 });
 
 export const SBill = z.object({
     userId: z.string(),
-    name: z.string().min(3),
+    name: z.string().min(3, "Bill name must have at least 3 characters"),
     amount: z.number(),
-    dueDate: z.string().date(),
+    dueDate: z.date(), 
     isPaid: z.boolean(),
-    createdAt: z.string().date()
+    createdAt: z.date() 
 });
