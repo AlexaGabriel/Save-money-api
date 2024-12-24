@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import fastifyCors from "@fastify/cors";
 import routesUser from "../Routes/RoutesUser";
+import routesTransaction from "../Routes/RoutesTransaction";
 
 const app = fastify({logger: true});
 app.register(fastifyCors);
@@ -13,6 +14,7 @@ app.get('/', async (request, reply) => {
 const start = async () => {
     try {
         app.register(routesUser);
+        app.register(routesTransaction);
         await app.listen({ port: 3000 });
     } catch (error) {
         app.log.error(error);

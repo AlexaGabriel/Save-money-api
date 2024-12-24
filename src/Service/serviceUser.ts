@@ -19,14 +19,15 @@ export class serviceUser{
     async UpdateUsers(data:IUser ,id: string): Promise<IUser>{
         const validate = SUser.safeParse(data);
         if(!validate.success){
-            throw new Error("Invalid user data");
+            const errorMessages = validate.error.issues.map(issue => issue.message).join(", ");
+            throw new Error(`Validation failed: ${errorMessages}`);
         }
         const update = await this.RepoUser.UpdateUser(data, id);
         return update;
     }
 
-    async ReadUsers(): Promise<IUser[]>{
-        const read = await this.RepoUser.ReadUsers();
+    async ListUsers(): Promise<IUser[]>{
+        const read = await this.RepoUser.ListUsers();
         return read;
     }
     

@@ -8,5 +8,5 @@ export interface IUser{
 export interface IRepoUser{
     CreateUser(data: IUser): Promise<IUser>
     UpdateUser(data: IUser, id: string): Promise<IUser>
-    ReadUsers(): Promise<IUser[]>
+    ListUsers(): Promise<IUser[]>
 }

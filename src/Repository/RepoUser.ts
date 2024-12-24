@@ -23,7 +23,7 @@ export class RepoUser implements IRepoUser{
         return Update;
 
     }
-    async ReadUsers(): Promise<IUser[]> {
+    async ListUsers(): Promise<IUser[]> {
         const Read = await prisma.user.findMany({});
         return Read;
     }
