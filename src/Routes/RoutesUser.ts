@@ -7,4 +7,10 @@ export default async function routesUser(app: FastifyInstance) {
     app.post('/user/create', async(request, reply) => {
         await userMidd.handleCreateUser(request, reply);
     });
+    app.put('/user/update/:id', async(request, reply) => {
+        await userMidd.handleUpdateUser(request, reply);
+    });
+    app.get('/user/list', async(request, reply) => {
+        await userMidd.handleListUsers(request, reply);
+    });
 };
