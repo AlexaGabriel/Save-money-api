@@ -7,7 +7,7 @@ export class middUser{
         this.ServiceUser = new serviceUser();
     }
 
-    async handleCreateUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+    async handleCreateUser(request: FastifyRequest, reply: FastifyReply) {
         const {name, email, password} = request.body as {
             name: string
             email: string
@@ -26,7 +26,7 @@ export class middUser{
             reply.status(500).send(`${error} failed create User`);
         }
     }
-    async handleUpdateUser(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+    async handleUpdateUser(request: FastifyRequest, reply: FastifyReply) {
         const {id} = request.params as {
             id: string
         };
@@ -47,12 +47,23 @@ export class middUser{
             reply.status(500).send(`${error} failed update User`);
         }
     }
-    async handleListUsers(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+    async handleListUsers(request: FastifyRequest, reply: FastifyReply) {
         try {
             const listUsers = await this.ServiceUser.ListUsers();
             reply.status(200).send(listUsers);
         } catch (error) {
             reply.status(500).send(`${error} failed list Users`);
+        }
+    }
+    async handleDeleteUser(request: FastifyRequest, reply: FastifyReply){
+        const {id} = request.params as {
+            id:string
+        };
+        try {
+            const delet = await this.ServiceUser.DeleteUser(id);
+            reply.status(200).send(delet);
+        } catch (error) {
+            reply.status(500).send(error);
         }
     }
         

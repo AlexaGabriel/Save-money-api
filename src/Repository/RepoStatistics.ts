@@ -3,7 +3,6 @@ import { prisma } from "../database/prisma";
 
 export class RepoStatistics implements IRepoStatistics{
     async CreateStatistics(userId: string): Promise<IStatistics> {
-        console.log("Inside RepoStatistics.CreateStatistics with userId:", userId);
         const create = await prisma.statistics.create({
             data: {
                 userId,
@@ -24,12 +23,25 @@ export class RepoStatistics implements IRepoStatistics{
         });
         return list;
     }
-    async UpdateStatistics(id: string, data: IStatistics): Promise<IStatistics> {
+    async UpdateStatistics(userId: string, data: IStatistics): Promise<IStatistics> {
+        const existingStatistics = await prisma.statistics.findUnique({
+            where: { userId }
+        });
+        
+        if (!existingStatistics) {
+            throw new Error(`No statistics found for userId: ${userId}`);
+        }
         const update = await prisma.statistics.update({
             where: {
-                userId: id
+                userId
             },
-            data
+            data:{
+                userId: data.userId!,
+                totalIncome: data.totalIncome,
+                totalExpense: data.totalExpense,
+                balance: data.balance,
+                updatedAt: new Date()
+            }
         });
         return update;
     }

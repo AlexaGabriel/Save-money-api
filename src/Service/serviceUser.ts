@@ -23,7 +23,8 @@ export class serviceUser{
         }
         return create;
     }
-    async UpdateUsers(data:IUser ,id: string): Promise<IUser>{        const validate = SUser.safeParse(data);
+    async UpdateUsers(data:IUser ,id: string): Promise<IUser>{        
+        const validate = SUser.safeParse(data);
         if(!validate.success){
             const errorMessages = validate.error.issues.map(issue => issue.message).join(", ");
             throw new Error(`Validation failed: ${errorMessages}`);
@@ -35,6 +36,11 @@ export class serviceUser{
     async ListUsers(): Promise<IUser[]>{
         const read = await this.RepoUser.ListUsers();
         return read;
+    }
+
+    async DeleteUser(id:string): Promise<IUser>{
+        const delet = await this.RepoUser.DeleteUser(id);
+        return delet; 
     }
     
 }

@@ -9,4 +9,5 @@ export interface IRepoUser{
     CreateUser(data: IUser): Promise<IUser>
     UpdateUser(data: IUser, id: string): Promise<IUser>
     ListUsers(): Promise<IUser[]>
+    DeleteUser(id:string): Promise<IUser>
 }

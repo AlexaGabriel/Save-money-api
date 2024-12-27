@@ -5,7 +5,7 @@ export class RepoTransactions implements IRepoTransaction{
     async CreateTransaction({userId, type, amount, category, date}:ITransaction): Promise<ITransaction> {
         const create = await prisma.transaction.create({
             data:{
-                userId,
+                userId: userId!,
                 type: type as "income" | "expense",
                 amount,
                 category,
@@ -37,6 +37,14 @@ export class RepoTransactions implements IRepoTransaction{
             type: transaction.type as "income" | "expense"
         }));
     }
+    async ListTransaction(id: string): Promise<ITransaction> {
+        const list = await prisma.transaction.findUnique({
+            where: {
+                id
+            }
+        });
+        return list as ITransaction;
+    }
     async UpdateTransactions(id: string, data: ITransaction): Promise<ITransaction> {
         const update = await prisma.transaction.update({
             where: {
@@ -48,6 +56,14 @@ export class RepoTransactions implements IRepoTransaction{
             }
         });
         return update as ITransaction;
+    }
+    async DeleteTransaction(id: string): Promise<ITransaction> {
+        const deleteTransaction = await prisma.transaction.delete({
+            where: {
+                id
+            }
+        });
+        return deleteTransaction as ITransaction;
     }
 
 }

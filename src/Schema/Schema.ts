@@ -15,14 +15,18 @@ export const STransactions = z.object({
     date: z.string().refine((value) => !isNaN(Date.parse(value)), {
         message: "Invalid date format.",}),
 });
+export const STransactionsU = z.object({
+    type: z.enum(["income", "expense"], { message: "Type must be either 'income' or 'expense'." }),
+    amount: z.number().positive({ message: "Amount must be a positive number." }),
+    category: z.string().min(1, { message: "Category must not be empty." }),
+    date: z.string().refine((value) => !isNaN(Date.parse(value)), {message: "Invalid date format.",})
+});
 
 export const SStatistics = z.object({
-    userId: z.string(),
-    totalIncome: z.number(),
-    totalExpense: z.number(),
-    balance: z.number(),
-    updateAt: z.date() 
-});
+    totalIncome: z.number().min(0, { message: "Total income must be zero or a positive number." }),
+    totalExpense: z.number().min(0, { message: "Total expense must be zero or a positive number." }),
+    balance: z.number()
+  });
 
 export const SGoal = z.object({
     userId: z.string(),

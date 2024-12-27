@@ -8,7 +8,6 @@ export class serviceStatistics {
         this.repoStatistics = new RepoStatistics();
     }
     async CreateStatistics(userId: string): Promise<IStatistics> {
-        console.log("Inside serviceStatistics.CreateStatistics with userId:", userId);
         const create = await this.repoStatistics.CreateStatistics(userId);
         return create;
     }
@@ -16,13 +15,14 @@ export class serviceStatistics {
         const list = await this.repoStatistics.ListStatistics(userId);
         return list;
     }
-    async UpdateStatistics(id: string, data: IStatistics): Promise<IStatistics> {
-        const validate = SStatistics.safeParse(data);
+
+    async UpdateStatistics(userId: string, {totalIncome, totalExpense, balance, updatedAt}: IStatistics): Promise<IStatistics> {
+        const validate = SStatistics.safeParse({ totalIncome, totalExpense, balance, updatedAt});
         if (!validate.success) {
             const errorMessages = validate.error.issues.map(issue => issue.message).join(", ");
             throw new Error(`Validation failed: ${errorMessages}`);
         }
-        const update = await this.repoStatistics.UpdateStatistics(id, data);
+        const update = await this.repoStatistics.UpdateStatistics(userId, { totalIncome, totalExpense, balance, updatedAt});
         return update;
     }
 }

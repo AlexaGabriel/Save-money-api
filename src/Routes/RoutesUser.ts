@@ -13,4 +13,7 @@ export default async function routesUser(app: FastifyInstance) {
     app.get('/user/list', async(request, reply) => {
         await userMidd.handleListUsers(request, reply);
     });
+    app.delete('/user/delete/:id', async(request, reply) =>{
+        await userMidd.handleDeleteUser(request, reply);
+    });
 };
