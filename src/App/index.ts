@@ -1,9 +1,10 @@
 import fastify from "fastify";
 import fastifyCors from "@fastify/cors";
-import routesUser from "../Routes/RoutesUser";
-import routesTransaction from "../Routes/RoutesTransaction";
-import routesStatitics from "../Routes/RoutesStatistics";
-import routesGoal from "../Routes/RoutesGoal";
+import routesUser from "../User/Routes/RoutesUser";
+import routesTransaction from "../Transaction/Routes/RoutesTransaction";
+import routesStatitics from "../Statistics/Routes/RoutesStatistics";
+import routesGoal from "../Goal/Routes/RoutesGoal";
+import { routesBill } from "../Bill/Routes/RoutesBill";
 
 const app = fastify({logger: true});
 app.register(fastifyCors);
@@ -19,6 +20,7 @@ const start = async () => {
         app.register(routesTransaction);
         app.register(routesStatitics);
         app.register(routesGoal);
+        app.register(routesBill);
         await app.listen({ port: 3000 });
     } catch (error) {
         app.log.error(error);
