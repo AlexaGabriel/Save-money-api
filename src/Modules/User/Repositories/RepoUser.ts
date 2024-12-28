@@ -1,4 +1,4 @@
-import { prisma } from "../../database/prisma";
+import { prisma } from "../../../database/prisma";
 import {IUser, IRepoUser} from "../Types/InterfaceUsers";
 
 export class RepoUser implements IRepoUser{

@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { serviceUser } from "../Service/serviceUser";
+import bcrypt from "bcrypt";
 
 export class middUser{
     private ServiceUser : serviceUser;
@@ -13,12 +14,14 @@ export class middUser{
             email: string
             password: string
         };
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         try {
             const newUser = await this.ServiceUser.CreateUser({
                 name,
                 email,
-                password,
+                password: hashedPassword,
                 createdAt: new Date(),
             });
             reply.status(201).send(newUser);

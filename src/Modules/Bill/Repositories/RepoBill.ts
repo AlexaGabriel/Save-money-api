@@ -1,5 +1,5 @@
 import { IBill, IRepoBill } from "../Types/InterfaceBill";
-import { prisma } from "../../database/prisma";
+import { prisma } from "../../../database/prisma";
 
 export class RepoBill implements IRepoBill{
     CreateBill(data: IBill): Promise<IBill> {

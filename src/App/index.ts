@@ -1,10 +1,10 @@
 import fastify from "fastify";
 import fastifyCors from "@fastify/cors";
-import routesUser from "../User/Routes/RoutesUser";
-import routesTransaction from "../Transaction/Routes/RoutesTransaction";
-import routesStatitics from "../Statistics/Routes/RoutesStatistics";
-import routesGoal from "../Goal/Routes/RoutesGoal";
-import { routesBill } from "../Bill/Routes/RoutesBill";
+import routesUser from "../Modules/User/Routes/RoutesUser";
+import routesTransaction from "../Modules/Transaction/Routes/RoutesTransaction";
+import routesStatitics from "../Modules/Statistics/Routes/RoutesStatistics";
+import routesGoal from "../Modules/Goal/Routes/RoutesGoal";
+import { routesBill } from "../Modules/Bill/Routes/RoutesBill";
 
 const app = fastify({logger: true});
 app.register(fastifyCors);

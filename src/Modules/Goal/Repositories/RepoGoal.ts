@@ -1,5 +1,5 @@
 import { IGoal, IRepoGoal } from "../Types/InterfaceGoal";
-import { prisma } from "../../database/prisma";
+import { prisma } from "../../../database/prisma";
 
 export class RepoGoal implements IRepoGoal{
     async CreateGoal({userId,name, targetAmount,currentAmount, deadline, createdAt}:IGoal): Promise<IGoal> {

@@ -1,5 +1,5 @@
 import { IStatistics, IRepoStatistics } from "../Types/InterfaceStatistics";
-import { prisma } from "../../database/prisma";
+import { prisma } from "../../../database/prisma";
 
 export class RepoStatistics implements IRepoStatistics{
     async CreateStatistics(userId: string): Promise<IStatistics> {
