@@ -13,7 +13,7 @@ export class MiddAuth{
             email,
             password,
             name: '',
-            id: ''
+            id: '2121'
         });
         if (!user) {
             return reply.status(400).send({ error: "Invalid email or password" });
@@ -22,7 +22,6 @@ export class MiddAuth{
         if (!passwordMatch) {
             return reply.status(400).send({ error: "Invalid email or password" });
         }
-        
         const token = request.server.jwt.sign({ id: user.id, email: user.email });
         return reply.status(200).send({ token });
     }}

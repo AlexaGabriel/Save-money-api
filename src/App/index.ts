@@ -10,14 +10,14 @@ import Jwt from "../Plugins/Jwt";
 
 const app = fastify({logger: true});
 app.register(fastifyCors);
-
+app.register(Jwt);
 app.get('/', async (request, reply) => {
     reply.send({ message: 'Hello, Alex!' });
   });
 
 const start = async () => {
     try {
-        app.register(Jwt);
+        
         app.register(routesUser);
         app.register(routesTransaction);
         app.register(routesStatitics);
