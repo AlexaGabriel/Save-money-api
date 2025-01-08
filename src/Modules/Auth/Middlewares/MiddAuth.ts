@@ -13,7 +13,7 @@ export class MiddAuth{
             email,
             password,
             name: '',
-            id: '2121'
+            id: ''
         });
         if (!user) {
             return reply.status(400).send({ error: "Invalid email or password" });

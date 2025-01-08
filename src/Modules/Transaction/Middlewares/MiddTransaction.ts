@@ -10,6 +10,13 @@ export class middTransaction{
     async handleCreateTransaction(req: FastifyRequest, res: FastifyReply){
         const {userId, type, amount, category, date} = req.body as {userId: string, type: "income" | "expense", amount: number, category: string, date: Date};
         try {
+            const decoded = await req.jwtVerify() as { id: string };
+            console.log(decoded);
+            console.log("Decoded userId:", decoded.id);
+            console.log("Request body userId:", userId);
+            if(decoded.id !== userId){
+                return res.status(401).send({message: "Unauthorized"});
+            }
             const create = await this.serviceTransaction.CreateTransaction({userId, type, amount, category, date});
             await this.serviceTransaction.updateStatistics(userId);
             res.status(201).send(create);
@@ -20,13 +27,16 @@ export class middTransaction{
     async handleListTransactions(req: FastifyRequest, res: FastifyReply){
         const {userId} = req.params as {userId: string};
         try {
+            const decoded = await req.jwtVerify() as { userId: string };
+            if(decoded.userId !== userId){
+                res.status(401).send({message: "Unauthorized"});
+            }
             const list = await this.serviceTransaction.ListTransactions(userId);
             res.status(200).send(list);
         } catch (error) {
             res.status(400).send(error);
         }
-    }
-    async handleListTransactionsOfType(req: FastifyRequest, res: FastifyReply){
+    }    async handleListTransactionsOfType(req: FastifyRequest, res: FastifyReply){
         const {userId, type} = req.params as {userId: string, type: "income" | "expense"};
         try {
             const list = await this.serviceTransaction.ListTransactionsOfType(userId, type);

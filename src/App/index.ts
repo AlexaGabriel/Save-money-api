@@ -5,7 +5,7 @@ import routesTransaction from "../Modules/Transaction/Routes/RoutesTransaction";
 import routesStatitics from "../Modules/Statistics/Routes/RoutesStatistics";
 import routesGoal from "../Modules/Goal/Routes/RoutesGoal";
 import { routesBill } from "../Modules/Bill/Routes/RoutesBill";
-import routesAuth from "../Modules/Auth/Routes/RoutesUser";
+import routesAuth from "../Modules/Auth/Routes/RoutesAuth";
 import Jwt from "../Plugins/Jwt";
 
 const app = fastify({logger: true});
