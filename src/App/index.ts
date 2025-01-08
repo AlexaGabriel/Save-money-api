@@ -5,10 +5,11 @@ import routesTransaction from "../Modules/Transaction/Routes/RoutesTransaction";
 import routesStatitics from "../Modules/Statistics/Routes/RoutesStatistics";
 import routesGoal from "../Modules/Goal/Routes/RoutesGoal";
 import { routesBill } from "../Modules/Bill/Routes/RoutesBill";
+import routesAuth from "../Modules/Auth/Routes/RoutesUser";
+import Jwt from "../Plugins/Jwt";
 
 const app = fastify({logger: true});
 app.register(fastifyCors);
-
 
 app.get('/', async (request, reply) => {
     reply.send({ message: 'Hello, Alex!' });
@@ -16,11 +17,14 @@ app.get('/', async (request, reply) => {
 
 const start = async () => {
     try {
+        app.register(Jwt);
         app.register(routesUser);
         app.register(routesTransaction);
         app.register(routesStatitics);
         app.register(routesGoal);
         app.register(routesBill);
+        app.register(routesAuth);
+        
         await app.listen({ port: 3000 });
     } catch (error) {
         app.log.error(error);
